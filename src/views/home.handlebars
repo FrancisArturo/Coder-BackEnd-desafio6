@@ -1,0 +1,39 @@
+<div>
+    <h1>Home</h1>
+    <h2>Welcome {{this.user.role}}: {{this.user.firstName}} {{this.user.lastName}} </h2>
+    <form action="/api/v1/session/logout" method="get">
+        <br />
+        <button type="submit">logout</button>
+    </form>
+    <h2>Products List</h2>
+    {{#if products}}
+        {{#each products}}
+            <div>
+                <h3>{{this.title}}</h3>
+                <p>description: {{this.description}}</p>
+                <p>price: {{this.price}}</p>
+                <p>category: {{this.category}}</p>
+                <p>stock: {{this.stock}} </p>
+                <p id="idProduct">id: {{this.id}}</p>
+                <button type="button" onclick="addCartProduct('{{this.id}}')" class="botonAgregarCarrito">Agregar al carrito</button>
+            </div>
+        {{/each }} 
+    
+    {{else}}
+        <p>No products found</p>
+    {{/if}}
+</div>
+
+<div>
+<br>
+<br>
+    <p>Pagina Actual: {{page}} </p>
+</div>
+{{#if hasPrevPage}}
+    <a href="/views/home?category={{category}}&page={{prevPage}}&limit={{limit}}&sort={{sort}}">Previous</a>
+{{/if}}
+{{#if hasNextPage}}
+    <a href="/views/home?category={{category}}&page={{nextPage}}&limit={{limit}}&sort={{sort}}">Next</a>
+{{/if}}
+
+<script src="/js/index.js"></script>
